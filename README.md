@@ -26,4 +26,46 @@ Postman-Token: fbe412cb-bbba-4efb-54d5-0585c8c8a082
 	"age" : "12"
 }
 
+### Liberty Profile Deployment desscriptor
+* [server.xml]
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="new server">
+  <!-- Enable features -->
+  <featureManager>
+    <feature>adminCenter-1.0</feature>
+    <feature>localConnector-1.0</feature>
+    <feature>webProfile-7.0</feature>
+  </featureManager>
+  <!-- Define the host name for use by the collective.
+        If the host name needs to be changed, the server should be
+        removed from the collective and re-joined. -->
+  <variable name="defaultHostName" value="localhost" />
+  <!-- Define an Administrator and non-Administrator -->
+  <basicRegistry id="basic">
+    <user name="admin" password="adminpwd" />
+    <user name="nonadmin" password="nonadminpwd" />
+  </basicRegistry>
+  <!-- Assign 'admin' to Administrator -->
+  <administrator-role>
+    <user>admin</user>
+  </administrator-role>
+  <keyStore id="defaultKeyStore" password="Liberty" />
+  <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="9080" httpsPort="9443" />
+  <applicationMonitor updateTrigger="mbean" />
+  <library id="DB2JCC4Lib">
+    <fileset dir="C:/DB2" includes="db2jcc4.jar db2jcc_license_cisuz.jar" />
+  </library>
+  <dataSource id="CustomerDataSource" jndiName="jdbc/customer" type="javax.sql.XADataSource">
+    <jdbcDriver libraryRef="DB2JCC4Lib" javax.sql.XADataSource="com.ibm.db2.jcc.DB2XADataSource" />
+    <properties.db2.jcc databaseName="IAALUNOS" serverName="192.168.190.180" portNumber="50000" driverType="4" connectionCloseWithInFlightTransaction="2" user="db2admin" password="db2admin" />
+  </dataSource>
+  <remoteFileAccess>
+    <writeDir>${server.config.dir}</writeDir>
+  </remoteFileAccess>
+  <application id="customer_profile_war" location="C:\workspaces\was-liberty-profile\spring-boot-projects-pagination\customer-profile\target\customer-profile-1.0-SNAPSHOT.war" name="customer_profile_war" type="war" />
+</server>
+
+
+
+
 
