@@ -28,7 +28,7 @@ Postman-Token: fbe412cb-bbba-4efb-54d5-0585c8c8a082
 
 ### Liberty Profile Deployment desscriptor
 * [server.xml]
-```
+```XML
 <?xml version="1.0" encoding="UTF-8"?>
 <server description="new server">
   <!-- Enable features -->
