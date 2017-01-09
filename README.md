@@ -75,6 +75,13 @@ Postman-Token: fbe412cb-bbba-4efb-54d5-0585c8c8a082
 </server>
 ```
 
-
-
+### DDL Database script for initial set up
+```
+CREATE TABLE DB2ADMIN.CUSTOMER_PROFILE (
+       ID BIGINT NOT NULL generated always as identity,
+       AGE SMALLINT,
+       "NAME" VARCHAR(100),
+       PRODUCT VARCHAR(100)
+);
+```
 
