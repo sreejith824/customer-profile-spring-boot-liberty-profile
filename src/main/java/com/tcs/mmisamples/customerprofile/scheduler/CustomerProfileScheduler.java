@@ -4,8 +4,11 @@ import com.tcs.mmisamples.customerprofile.service.CustomerProfileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,6 +17,9 @@ import java.util.Date;
  * Created by SSasidharan on 2017/01/09.
  */
 @Component
+@EnableAsync
+@EnableScheduling
+@EnableTransactionManagement
 public class CustomerProfileScheduler {
 
     private static final Logger log = LoggerFactory.getLogger(CustomerProfileScheduler.class);
@@ -25,7 +31,7 @@ public class CustomerProfileScheduler {
 
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
-        System.out.println("The time is now {}" +  dateFormat.format(new Date()));
+        System.out.println("The time is now {}" + dateFormat.format(new Date()));
         customerProfileService.getCustomerProfile(1);
         System.out.println(customerProfileService.getCustomerProfile(1).getName());
     }

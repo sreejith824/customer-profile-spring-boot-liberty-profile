@@ -1,9 +1,10 @@
-package com.tcs.mmisamples.customerprofile.dao.config;
+package com.tcs.mmisamples.customerprofile.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
@@ -13,14 +14,15 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
- * @author Narayanan Raghavan
- * @since 1.0
+ * Created by SSasidharan on 2017/01/03.
+ * CORS configuration class for Spring MVC.
  */
 @Configuration
-//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-public class WebSphereDevJPADatabaseConfiguration {
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+public class CustomerProfileRepositoryConfig {
 
     private static final String JNDI_NAME = "jdbc/customer";
+
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
@@ -52,13 +54,10 @@ public class WebSphereDevJPADatabaseConfiguration {
     }
 
     @Bean
-    public DataSourceInitializer dataSourceInitializer(DataSource dataSource)
-    {
+    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
         DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
         dataSourceInitializer.setDataSource(dataSource);
         dataSourceInitializer.setEnabled(true);
         return dataSourceInitializer;
     }
-
-
 }

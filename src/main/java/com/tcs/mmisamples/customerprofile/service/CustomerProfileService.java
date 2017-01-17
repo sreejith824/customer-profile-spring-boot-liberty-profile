@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public interface CustomerProfileService {
     /**
      * API method to return all Customerprofiles in the system with pagination.
+     *
      * @param pageable
      * @return
      */
@@ -20,6 +21,7 @@ public interface CustomerProfileService {
 
     /**
      * API method to create a Customerprofile.
+     *
      * @param customerProfile
      * @return
      */
@@ -27,6 +29,7 @@ public interface CustomerProfileService {
 
     /**
      * API method to return Customerprofiles with given name in the system with pagination.
+     *
      * @param name
      * @param pageable
      * @return

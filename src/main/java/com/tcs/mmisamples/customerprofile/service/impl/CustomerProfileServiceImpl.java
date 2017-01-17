@@ -4,6 +4,7 @@ import com.tcs.mmisamples.customerprofile.dao.CustomerProfilePaginationRepositor
 import com.tcs.mmisamples.customerprofile.domain.CustomerProfile;
 import com.tcs.mmisamples.customerprofile.service.CustomerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.util.Date;
 
 /**
  * Created by SSasidharan on 2016/12/26.
@@ -24,6 +24,9 @@ public class CustomerProfileServiceImpl implements CustomerProfileService {
     CustomerProfilePaginationRepository customerProfilePaginationRepository;
 
     @Autowired
+    ApplicationContext applicationContext;
+
+    @Autowired
     DataSource dataSource;
 
     public CustomerProfileServiceImpl() {
@@ -33,9 +36,9 @@ public class CustomerProfileServiceImpl implements CustomerProfileService {
     @PostConstruct
     public void loadData() {
         CustomerProfile customerProfile = null;
-        for (int i=0 ; i < 1000; i++) {
-            customerProfile = new CustomerProfile("Test : " + i %5, i%30);
-            customerProfile.setProduct("Product : " + i%5);
+        for (int i = 0; i < 1000; i++) {
+            customerProfile = new CustomerProfile("Test : " + i % 5, i % 30);
+            customerProfile.setProduct("Product : " + i % 5);
             saveCustomerProfile(customerProfile);
         }
     }
@@ -54,6 +57,12 @@ public class CustomerProfileServiceImpl implements CustomerProfileService {
 
     @Override
     public Page<CustomerProfile> findCustomerProfileByName(String name, Pageable pageable) {
+
+        String[] beanNames = applicationContext.getBeanDefinitionNames();
+        System.out.println("----------- Number of beans initialized in CustomerProfileServiceImpl : " + beanNames.length + "-------------------");
+        for (String beanName: beanNames) {
+            System.out.println("-----------" + beanName + "-------------------");
+        }
         return customerProfilePaginationRepository.findCustomerProfileByName(name, pageable);
     }
 

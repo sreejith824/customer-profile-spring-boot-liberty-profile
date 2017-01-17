@@ -4,7 +4,6 @@ import com.tcs.mmisamples.customerprofile.domain.CustomerProfile;
 import com.tcs.mmisamples.customerprofile.service.CustomerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -21,6 +20,7 @@ public class CustomerProfileController {
 
     /**
      * API method to return all Customerprofiles in the system with pagination.
+     *
      * @param pageable
      * @return
      */
@@ -31,19 +31,21 @@ public class CustomerProfileController {
 
     /**
      * API method to return Customerprofiles with given name in the system with pagination.
+     *
      * @param name
      * @param pageable
      * @return
      */
-    @RequestMapping(value="/search", method = {RequestMethod.GET}, produces = "application/json")
+    @RequestMapping(value = "/search", method = {RequestMethod.GET}, produces = "application/json")
     Iterable<CustomerProfile> findCustomerProfileByName(
-            @RequestParam (value = "name") String name,
+            @RequestParam(value = "name") String name,
             Pageable pageable) {
         return customerProfileService.findCustomerProfileByName(name, pageable);
     }
 
     /**
      * API method to create a Customerprofile.
+     *
      * @param customerProfile
      * @return
      */

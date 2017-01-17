@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
 
 /**
  * Created by SSasidharan on 2016/12/26.
@@ -24,7 +23,7 @@ public class CustomerProfile {
 
     @Id
     @GeneratedValue
-    private  int id;
+    private int id;
 
     protected CustomerProfile() {
     }

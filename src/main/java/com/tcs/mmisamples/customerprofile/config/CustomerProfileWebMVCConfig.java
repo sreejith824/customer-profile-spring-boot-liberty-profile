@@ -1,7 +1,6 @@
 package com.tcs.mmisamples.customerprofile.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -12,8 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @EnableWebMvc
-@EnableScheduling
-public class CustomerProfileConfig extends WebMvcConfigurerAdapter {
+
+public class CustomerProfileWebMVCConfig extends WebMvcConfigurerAdapter {
+
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**");
